@@ -1,0 +1,31 @@
+<!-- Basic Landing Page -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main">
+    <form action="" class="searchbar">
+        <label for="search">Room Name</label>
+        <input class="searchbox" size="40" type="text" name="search" id="" placeholder="Enter room name...">
+        <input type="submit" value="Search">
+    </form>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Create Room">
+    </form>
+</div>
+
+
+{% for room in rooms %}
+<hr>
+<h1><a href="{% url 'room' room.id%}">{{room.title}}</a></h1>
+<p>Created by {{room.creator.email}}</p>
+<hr>
+{% empty %}
+<h1>No Rooms Found</h1>
+{% endfor %}
+
+
+{% endblock %}
